@@ -30,12 +30,21 @@ module.exports = {
     'react/prefer-stateless-function': 0,
     'no-use-before-define': 0,
     'no-param-reassign': 0,
-    'import/no-useless-path-segments': 0
+    'import/no-useless-path-segments': 0,
+    'react/jsx-uses-vars': 2,
+    'react/jsx-closing-bracket-location': 1,
+    'react/jsx-first-prop-new-line': 1,
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
   },
   plugins: ['prettier'],
   env: {
-    "es6": true,
-    "browser": true,
-    "node": true
-  }
+    es6: true,
+    browser: true,
+    node: true,
+  },
 };

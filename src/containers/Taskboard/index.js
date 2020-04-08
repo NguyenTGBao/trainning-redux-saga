@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core';
-import styles from './styles';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import Grid from '@material-ui/core/Grid';
+import PropTypes from 'prop-types';
 import { STATUSES } from '../../constants/index';
 import TaskList from '../../components/TaskList/index';
 import TaskForm from '../../components/TaskForm';
-import PropTypes from 'prop-types';
+import styles from './styles';
 
 const listTask = [
   {
