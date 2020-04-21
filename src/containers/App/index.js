@@ -1,16 +1,71 @@
-import React from 'react';
-import styles from './styles';
 import { withStyles } from '@material-ui/core';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
-import Taskboard from '../Taskboard/index.js';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Switch } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import AdminLayoutRoute from '../../commons/Layout/AdminLayoutRoute';
+import DefaultLayoutRoute from '../../commons/Layout/DefaultLayoutRoute';
 import theme from '../../commons/Theme';
+import GlobalLoading from '../../components/GlobalLoading';
+import Modal from '../../components/Modal';
+import { ADMIN_ROUTES, ROUTES } from '../../constants';
+import configureStore from '../../redux/configureStore';
+import styles from './styles';
+
+const store = configureStore();
 
 class App extends React.Component {
+  renderAdminRoutes() {
+    let xhtml = null;
+    xhtml = ADMIN_ROUTES.map((route) => {
+      return (
+        <AdminLayoutRoute
+          key={route.path}
+          path={route.path}
+          component={route.component}
+          exact={route.exact}
+          name={route.name}
+        />
+      );
+    });
+    return xhtml;
+  }
+
+  renderDefaultRoutes() {
+    let xhtml = null;
+    xhtml = ROUTES.map((route) => {
+      return (
+        <DefaultLayoutRoute
+          key={route.path}
+          path={route.path}
+          component={route.component}
+          exact={route.exact}
+          name={route.name}
+        />
+      );
+    });
+    return xhtml;
+  }
+
   render() {
     return (
-      <ThemeProvider theme={theme}>
-        <Taskboard />
-      </ThemeProvider>
+      <Provider store={store}>
+        <BrowserRouter>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <ToastContainer />
+            <GlobalLoading />
+            <Modal />
+            <Switch>
+              {this.renderAdminRoutes()}
+              {this.renderDefaultRoutes()}
+            </Switch>
+          </ThemeProvider>
+        </BrowserRouter>
+      </Provider>
     );
   }
 }
